@@ -1,0 +1,35 @@
+<!-- Join Screen -->
+<div *ngIf="!joined" class="center">
+  <h2>Enter a User ID to Join</h2>
+  <input [(ngModel)]="userId" placeholder="Your User ID" />
+  <button (click)="joinChat()">Join Chat</button>
+</div>
+
+<!-- Chat Screen -->
+<div *ngIf="joined" class="chat">
+  <h2>Open Group Chat - {{ userId }}</h2>
+
+  <!-- Messages Display -->
+  <div class="messages">
+    <div *ngFor="let msg of messages()">
+      <strong>{{ msg.user }}:</strong> {{ msg.text }}
+    </div>
+  </div>
+
+  <!-- Input + Emoji Picker -->
+  <div class="input-group">
+    <input
+      [(ngModel)]="message"
+      (keydown.enter)="sendMessage()"
+      placeholder="Type your message..."
+    />
+    <button type="button" (click)="showEmojiPicker = !showEmojiPicker"></button>
+    <button type="button" (click)="sendMessage()">Send</button>
+  </div>
+  <emoji-mart class="emoji-mart" [set]="set" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+  </div>
+
+
+
+
+  
